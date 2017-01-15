@@ -37,6 +37,12 @@ script:
   - cat .kitchen/logs/kitchen.log
 
 matrix:
+  allow_failures:
+    - env: INSTANCE=default-centos-68
+    - env: INSTANCE=default-centos-7
+    - env: INSTANCE=default-ubuntu-1404
+    - env: INSTANCE=default-debian-7
+    - env: INSTANCE=default-debian-8
   include:
     - script:
       - /opt/chefdk/bin/chef exec rake
