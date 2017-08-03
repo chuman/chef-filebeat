@@ -17,7 +17,7 @@
 # limitations under the License.
 #
 
-version_string = node['platform_family'] == 'rhel' ? "#{node['filebeat']['version']}-#{node['filebeat']['release']}" : node['filebeat']['version']
+version_string = node['platform_family'] == 'rhel' || 'amazon' ? "#{node['filebeat']['version']}-#{node['filebeat']['release']}" : node['filebeat']['version']
 
 case node['platform_family']
 when 'debian'
@@ -68,6 +68,6 @@ package 'filebeat' do # ~FC009
   version version_string unless node['filebeat']['ignore_version']
   options node['filebeat']['apt']['options'] if node['filebeat']['apt']['options'] && node['platform_family'] == 'debian'
   notifies :restart, "service[#{node['filebeat']['service']['name']}]" if node['filebeat']['notify_restart'] && !node['filebeat']['disable_service']
-  flush_cache(:before => true) if node['platform_family'] == 'rhel'
-  allow_downgrade true if node['platform_family'] == 'rhel'
+  flush_cache(:before => true) if ['rhel', 'amazon'].include? node['platform_family'
+  allow_downgrade true if ['rhel', 'amazon'].include? node['platform_family']
 end

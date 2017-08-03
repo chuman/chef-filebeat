@@ -19,7 +19,7 @@
 
 include_recipe 'filebeat::attributes'
 
-include_recipe 'yum-plugin-versionlock::default' if node['platform_family'] == 'rhel'
+include_recipe 'yum-plugin-versionlock::default' if ['rhel', 'amazon'].include? node['platform_family']
 
 # install filebeat
 case node['platform']
