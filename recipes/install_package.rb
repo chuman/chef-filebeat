@@ -17,7 +17,7 @@
 # limitations under the License.
 #
 
-version_string = node['platform_family'] == 'rhel' || 'amazon' ? "#{node['filebeat']['version']}-#{node['filebeat']['release']}" : node['filebeat']['version']
+version_string = ['rhel', 'amazon'].include? node['platform_family'] ? "#{node['filebeat']['version']}-#{node['filebeat']['release']}" : node['filebeat']['version']
 
 case node['platform_family']
 when 'debian'
