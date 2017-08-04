@@ -41,7 +41,7 @@ when 'debian'
     end
   end
 
-when 'rhel'
+when 'rhel', 'amazon'
   if node['filebeat']['setup_repo']
     # yum repository configuration
     yum_repository 'beats' do
